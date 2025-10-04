@@ -28,27 +28,31 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # Get PR diff and filter code files
-      - name: Get PR Diff / Code Files
+      # Get latest commit diff and filter code files
+      - name: Get Latest Commit Diff / Code Files
         id: diff
         run: |
-          BASE=${{ github.base_ref }}
-          git fetch origin $BASE --depth=1
-
-          # Define code file extensions
           CODE_EXTENSIONS="\.js$|\.jsx$|\.ts$|\.tsx$|\.py$|\.html$|\.css$|\.scss$|\.json$|\.java$|\.cpp$|\.c$|\.rb$|\.go$|\.rs$|\.php$|\.kt$|\.swift$|\.sh$"
 
-          # List all changed files
-          git diff --name-only origin/$BASE > changed_files.txt
+          LAST_COMMIT=${{ github.sha }}
+          PREV_COMMIT=${{ github.event.before }}
+
+          echo "Comparing commit $PREV_COMMIT -> $LAST_COMMIT"
+
+          # List changed files in latest commit
+          git diff --name-only $PREV_COMMIT $LAST_COMMIT > changed_files.txt
 
           # Filter only code files
           grep -E "$CODE_EXTENSIONS" changed_files.txt > code_files.txt || true
 
+          # Ensure file exists
+          touch code_files.txt
+
           # Generate diff of code files only
           if [ -s code_files.txt ]; then
-            git diff origin/$BASE -- $(cat code_files.txt) > changes.diff
+            git diff $PREV_COMMIT $LAST_COMMIT -- $(cat code_files.txt) > changes.diff
           else
-            echo "No code files changed."
+            echo "No code files changed in the latest commit."
             touch changes.diff
           fi
 
