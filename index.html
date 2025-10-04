@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bad Demo Page</title>
+    <style>
+      body {
+        background: red; /* hard to read */
+        font-size: 10px; /* too small */
+        font-family: comic-sans; /* misspelled + bad choice */
+      }
+
+      .btn {
+        background-color: blue;
+        color: yellow;
+        padding: 5px;
+        border: 1px solid black;
+        margin: 2px;
+      }
+
+      .btn {
+        background-color: green; /* duplicate selector, overrides above */
+      }
+
+      #header {
+        font-weigth: bold; /* typo: should be font-weight */
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="header">Welcome To My Website</h1>
+    <p>This is <b>really</b> cool site</p>
+    <img src="notfound.jpg" />
+
+    <button class="btn" onclick="doSomething()">Click Me!</button>
+
+    <script>
+      function doSomething() {
+        alert("button clicked");
+        var numbers = [1, 2, 3];
+        for (i = 0; i < numbers.length; i++) {
+          // missing 'let' or 'var'
+          console.log(numbers[i]);
+        }
+
+        if (true) {
+          unusedVar = 42; // undeclared variable
+        }
+
+        document.getElementById("missing").innerText = "Hello"; // element doesn't exist
+      }
+
+      // bad practice: global variable
+      counter = 0;
+      setInterval(function () {
+        counter++;
+        console.log("counter is " + counter);
+      }, "1000"); // string instead of number
+    </script>
+  </body>
+</html>
