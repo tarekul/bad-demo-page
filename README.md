@@ -17,7 +17,6 @@ Create `.github/workflows/code-review.yml` in your repo and paste the workflow Y
 
 3. **Optional: Install ESLint**
 
-```bash
 npm install eslint --save-dev
 npx eslint --init
 
@@ -31,8 +30,7 @@ The action will:
 - Send diff to Gemini 2.5 Flash
 - Post AI review as PR comment
 
-Notes
+## Notes
 
 - Only works on pull requests.
 - For best results, keep PRs small.
-```
