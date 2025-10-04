@@ -55,6 +55,9 @@ jobs:
           echo "Changed code files:"
           cat code_files.txt
 
+          echo "Preview of changes.diff (first 50 lines):"
+          head -n 50 changes.diff
+
           # Save code files list to env
           printf "CHANGED_FILES='%s'\n" "$(cat code_files.txt)" >> $GITHUB_ENV
 
