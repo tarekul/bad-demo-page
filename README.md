@@ -17,8 +17,8 @@ Create `.github/workflows/code-review.yml` in your repo and paste the workflow Y
 
 3. **Optional: Install ESLint**
 
-npm install eslint --save-dev
-npx eslint --init
+- `npm install eslint --save-dev`
+- `npx eslint --init`
 
 4. **Open a pull request to main.**
 
