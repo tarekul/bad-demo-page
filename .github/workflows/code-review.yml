@@ -42,7 +42,7 @@ jobs:
           git diff --name-only origin/$BASE > changed_files.txt
 
           # Filter only code files
-          grep -E "$CODE_EXTENSIONS" changed_files.txt || true > code_files.txt
+          grep -E "$CODE_EXTENSIONS" changed_files.txt > code_files.txt || true
 
           # Generate diff of code files only
           if [ -s code_files.txt ]; then
